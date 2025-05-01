@@ -1,24 +1,18 @@
 <?php
 /**
  * WPTranslations
- * 
+ *
  * @category ComposerPlugin
- * @package  RaphTopo\WPTranslations
- * @author   Raphael <raph-topo@posteo.net>
- * @license  GPL-3.0 https://github.com/raph-topo/wp-translations/blob/master/LICENSE
- * @link     https://github.com/raph-topo/wp-translations
+ * @package  WpnxIo\WPTranslations
+ * @license  GPL-3.0 https://github.com/wpnx-io/wp-translations/blob/master/LICENSE
  */
 
-namespace RaphTopo\WPTranslations;
+namespace WpnxIo\WPTranslations;
 
 /**
  * Class Translatable
  *
  * @category ComposerPlugin
- * @package  RaphTopo\WPTranslations
- * @author   Raphael <raph-topo@posteo.net>
- * @license  GPL-3.0 https://github.com/raph-topo/wp-translations/blob/master/LICENSE
- * @link     https://github.com/raph-topo/wp-translations
  */
 class Translatable
 {
@@ -192,7 +186,7 @@ class Translatable
      * Unpack the downloaded translation ZIP file in the destination directory.
      *
      * @param string $tmpZipFileName Path to the translation ZIP file.
-     * 
+     *
      * @return bool Whether the operation was successful or not.
      *
      * @throws \Exception
@@ -225,7 +219,7 @@ class Translatable
      * Download and extract the translation ZIP file in our destination directory.
      *
      * @param string $packageUrl The URL to the translation package ZIP file.
-     * 
+     *
      * @return bool Whether the operation was successful or not.
      */
     public function installTranslation($packageUrl): bool

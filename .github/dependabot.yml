@@ -4,8 +4,6 @@ updates:
     directory: "/"
     schedule:
       interval: "weekly"
-    assignees:
-      - raph-topo
     commit-message:
       prefix: "Composer update"
       include: "scope"

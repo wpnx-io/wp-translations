@@ -1,26 +1,18 @@
 {
-    "name": "raph-topo/wp-translations",
+    "name": "wpnx-io/wp-translations",
     "description": "Composer plugin to download translation files from wordpress.org",
     "license": "GPL-3.0-or-later",
     "type": "composer-plugin",
-    "authors": [
-        {
-            "name": "Raphael",
-            "email": "raph-topo@posteo.net",
-            "homepage": "https://github.com/raph-topo",
-            "role": "owner"
-        }
-    ],
     "require": {
         "composer-plugin-api": "^2.0"
     },
     "autoload": {
         "psr-4": {
-            "RaphTopo\\WPTranslations\\": "src"
+            "WpnxIo\\WPTranslations\\": "src"
         }
     },
     "extra": {
-        "class": "RaphTopo\\WPTranslations\\WPTranslations"
+        "class": "WpnxIo\\WPTranslations\\WPTranslations"
     },
     "require-dev": {
         "composer/composer": "^2.5"

@@ -1,15 +1,13 @@
 <?php
 /**
  * WPTranslations
- * 
+ *
  * @category ComposerPlugin
- * @package  RaphTopo\WPTranslations
- * @author   Raphael <raph-topo@posteo.net>
- * @license  GPL-3.0 https://github.com/raph-topo/wp-translations/blob/master/LICENSE
- * @link     https://github.com/raph-topo/wp-translations
+ * @package  WpnxIo\WPTranslations
+ * @license  GPL-3.0 https://github.com/wpnx-io/wp-translations/blob/master/LICENSE
  */
 
-namespace RaphTopo\WPTranslations;
+namespace WpnxIo\WPTranslations;
 
 use Composer\Composer;
 use Composer\EventDispatcher\EventSubscriberInterface;
@@ -20,14 +18,8 @@ use Composer\Package\PackageInterface;
 
 /**
  * WPTranslations
- * 
+ *
  * Main plugin logic.
- * 
- * @category ComposerPlugin
- * @package  RaphTopo\WPTranslations
- * @author   Raphael <raph-topo@posteo.net>
- * @license  GPL-3.0 https://github.com/raph-topo/wp-translations/blob/master/LICENSE
- * @link     https://github.com/raph-topo/wp-translations
  */
 class WPTranslations implements PluginInterface, EventSubscriberInterface
 {
@@ -48,14 +40,14 @@ class WPTranslations implements PluginInterface, EventSubscriberInterface
 
     /**
      * Composer.
-     * 
+     *
      * @var Composer
      */
     protected $composer;
 
     /**
      * IOInterface.
-     * 
+     *
      * @var IOInterface
      */
     protected $io;
@@ -75,13 +67,13 @@ class WPTranslations implements PluginInterface, EventSubscriberInterface
 
         /**
          * Check & parse `wordpress-translations`
-         * 
+         *
          * Array of locales.
          */
         try {
             $languages = $this->composer->getPackage()->getExtra()['wordpress-translations'];
         } catch (\Exception $e) {
-            
+
         }
         if (empty($languages) || ! is_array($languages)) {
             throw new \Exception('WP Translations requires \'wordpress-translations\' to be set: see README');
@@ -91,18 +83,18 @@ class WPTranslations implements PluginInterface, EventSubscriberInterface
 
         /**
          * Check & parse `wordpress-translations-dir`
-         * 
+         *
          * Path to directory as string.
          */
         try {
             $targetDir = $this->composer->getPackage()->getExtra()['wordpress-translations-dir'];
         } catch (\Exception $e) {
-            
+
         }
         if (empty($targetDir) || ! is_string($targetDir)) {
             throw new \Exception('WP Translations requires \'wordpress-translations-dir\' to be set: see README');
         } else {
-            $this->wpLanguagesDir = dirname($composer->getConfig()->get('vendor-dir'))  . '/' . $targetDir;        
+            $this->wpLanguagesDir = dirname($composer->getConfig()->get('vendor-dir'))  . '/' . $targetDir;
         }
     }
 
@@ -128,7 +120,7 @@ class WPTranslations implements PluginInterface, EventSubscriberInterface
      * Our callback for the post-package-install event.
      *
      * @param PackageEvent $event The package event object.
-     * 
+     *
      * @return void
      */
     public function postPackageInstall(PackageEvent $event)
@@ -140,7 +132,7 @@ class WPTranslations implements PluginInterface, EventSubscriberInterface
      * Our callback for the post-package-update event.
      *
      * @param PackageEvent $event The package event object.
-     * 
+     *
      * @return void
      */
     public function postPackageUpdate(PackageEvent $event)
@@ -152,7 +144,7 @@ class WPTranslations implements PluginInterface, EventSubscriberInterface
      * Get translations for a package, where applicable.
      *
      * @param PackageInterface $package PackageInterface
-     * 
+     *
      * @return void
      */
     protected function getTranslations(PackageInterface $package)
@@ -171,9 +163,7 @@ class WPTranslations implements PluginInterface, EventSubscriberInterface
                 $t = new Translatable('theme', $name, $package->getVersion(), $this->languages, $this->wpLanguagesDir);
                 break;
             case 'wordpress-core':
-                if ('roots' === $provider && 'wordpress' === $name) {
-                    $t = new Translatable('core', $name, $package->getVersion(), $this->languages, $this->wpLanguagesDir);
-                }
+                $t = new Translatable('core', $name, $package->getVersion(), $this->languages, $this->wpLanguagesDir);
                 break;
 
             default:
@@ -189,7 +179,7 @@ class WPTranslations implements PluginInterface, EventSubscriberInterface
                 } else {
                     foreach ($results as $result) {
                         $this->io->writeError(
-                            '  - Translations of <info>' . $package->getName(). '</info>: ' 
+                            '  - Translations of <info>' . $package->getName(). '</info>: '
                             . 'Downloaded <comment>' . $result . '</comment>'
                         );
                     }
@@ -197,7 +187,7 @@ class WPTranslations implements PluginInterface, EventSubscriberInterface
             }
         } catch (\Exception $e) {
             $this->io->writeError(
-                '  - Translations of <info>' . $package->getName(). '</info>: ' 
+                '  - Translations of <info>' . $package->getName(). '</info>: '
                 . '<error> ' . $e->getMessage() . ' </error>'
             );
         }
@@ -212,7 +202,7 @@ class WPTranslations implements PluginInterface, EventSubscriberInterface
      *
      * @param Composer    $composer Composer
      * @param IOInterface $io       IOInterface
-     * 
+     *
      * @return void
      */
     public function deactivate(Composer $composer, IOInterface $io)
@@ -228,7 +218,7 @@ class WPTranslations implements PluginInterface, EventSubscriberInterface
      *
      * @param Composer    $composer Composer
      * @param IOInterface $io       IOInterface
-     * 
+     *
      * @return void
      */
     public function uninstall(Composer $composer, IOInterface $io)
